@@ -3,7 +3,6 @@
 #include <string>
 #include <algorithm>
 #include <unistd.h>
-// using namespace std;
 
 // arguments
 // 1: file name
@@ -21,8 +20,7 @@ int main(int argc, char *argv[])
     extern int optind, opterr, optopt;
 
     // argument variables and defaults
-    std::string sep = ",";
-    char searcher = ',';
+    char sep = ',';
 
 
     // iterarate through the options
@@ -35,7 +33,7 @@ int main(int argc, char *argv[])
             switch (c)
             {
             case 's':
-                searcher = *optarg;
+                sep = *optarg;
                 break;
             case '?':
                 fprintf(stderr, "Unrecognized option: -%c\n", optopt);
@@ -69,15 +67,13 @@ int main(int argc, char *argv[])
     getline(infile, line);
 
     // count number of commas
-    int numChars = std::count(line.begin(), line.end(), searcher);
+    unsigned int numChars = std::count(line.begin(), line.end(), sep);
 
     // add one
     numChars++;
 
     // print the number of characters to the screen
     std::cout << numChars << std::endl;
-    // print sep
-    // std::cout << searcher << std::endl;
 
     // close the file
     infile.close();
